@@ -1,37 +1,54 @@
 import {Header} from './components';
 import {Home, Cart} from './pages';
 import {Switch, Route, Redirect} from 'react-router';
-import {useEffect, useState} from 'react';
+import {connect} from 'react-redux';
+import {setPizzas} from './redux/actions/pizzas';
+import React from 'react';
 import axios from 'axios';
 import "./App.scss";
 
 
-function App() {
+class App extends React.Component {
 
-  const [pizzas, setPizzas] = useState([]);
+  componentDidMount() {
+    axios.get('https://react-pizza-de682-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json').then((response) => {
+      this.props.setPizzas(response.data);
+    });
+  }
 
-  useEffect(() => {
-    axios.get('https://react-pizza-de682-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json').then((response) => setPizzas(response.data));
-  }, []);
-
-  return (
-    <div className="App">
-      <div className="wrapper">
-        <Header />
-        <div className="content">
-          <Switch>
-            <Route path="/" exact>
-              <Home items={pizzas} />
-            </Route>
-            <Route path='/cart' exact>
-              <Cart />
-            </Route>
-            <Redirect to="/"/>
-          </Switch>
+  render() {
+    return (
+      <div className="App">
+        <div className="wrapper">
+          <Header />
+          <div className="content">
+            <Switch>
+              <Route path="/" exact>
+                <Home items={this.props.items} />
+              </Route>
+              <Route path='/cart' exact>
+                <Cart />
+              </Route>
+              <Redirect to="/"/>
+            </Switch>
+          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = (store) => {
+  return {
+    items: store.pizzas.items,
+    filters: store.filters
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setPizzas: (items) => dispatch(setPizzas(items))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

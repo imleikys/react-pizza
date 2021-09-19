@@ -45,7 +45,7 @@ export const SortPopup = (props) => {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={toggleVisibility}>{props.items[activeItem]}</span>
+        <span onClick={toggleVisibility}>{props.items[activeItem].name}</span>
       </div>
       {
         isVisible ? 
@@ -53,12 +53,14 @@ export const SortPopup = (props) => {
         <div className="sort__popup">
           <ul>
           { 
-            props.items.map((item, index) => 
-              <li 
-                className={activeItem === index ? 'active' : ''}
-                onClick={() => onSelectItem(index)} 
-                key={`${item}__${index}`}>{item}
-              </li>
+            props.items.map((obj, index) => 
+            <li 
+              onClick={() => onSelectItem(index)} 
+              className={activeItem === index ? 'active' : ''}
+              key={`${obj.type}__${index}`}
+            >
+              {obj.name}
+            </li>
             ) 
           }
           </ul>
