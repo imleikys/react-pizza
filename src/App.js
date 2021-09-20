@@ -1,54 +1,71 @@
 import {Header} from './components';
 import {Home, Cart} from './pages';
 import {Switch, Route, Redirect} from 'react-router';
-import {connect} from 'react-redux';
 import {setPizzas} from './redux/actions/pizzas';
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import "./App.scss";
 
 
-class App extends React.Component {
+const App = () => {
+  
+  const dispatch = useDispatch();
+  const appStore = useSelector(({pizzas}) => {
+    return {
+      items: pizzas.items
+    }
+  });
 
-  componentDidMount() {
+  useEffect(() => {
     axios.get('https://react-pizza-de682-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json').then((response) => {
-      this.props.setPizzas(response.data);
+      dispatch(setPizzas(response.data));
     });
-  }
+  }, []);
 
-  render() {
-    return (
-      <div className="App">
-        <div className="wrapper">
-          <Header />
-          <div className="content">
-            <Switch>
-              <Route path="/" exact>
-                <Home items={this.props.items} />
-              </Route>
-              <Route path='/cart' exact>
-                <Cart />
-              </Route>
-              <Redirect to="/"/>
-            </Switch>
-          </div>
+  return (
+    <div className="App">
+      <div className="wrapper">
+        <Header />
+        <div className="content">
+          <Switch>
+            <Route path="/" exact>
+              <Home items={appStore.items} />
+            </Route>
+            <Route path='/cart' exact>
+              <Cart />
+            </Route>
+            <Redirect to="/"/>
+          </Switch>
         </div>
       </div>
-    );
-  }
+    </div>
+  )
 }
 
-const mapStateToProps = (store) => {
-  return {
-    items: store.pizzas.items,
-    filters: store.filters
-  }
-}
+export default App;
+// class App extends React.Component {
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    setPizzas: (items) => dispatch(setPizzas(items))
-  }
-}
+//   componentDidMount() {
+//     
+//   }
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+//   render() {
+//     return 
+//   }
+// }
+
+// const mapStateToProps = (store) => {
+//   return {
+//     items: store.pizzas.items,
+//     filters: store.filters
+//   }
+// }
+
+// const mapDispatchToProps = (dispatch) => {
+//   return {
+//     setPizzas: (items) => dispatch(setPizzas(items))
+//   }
+// }
+
+// export default connect(mapStateToProps, mapDispatchToProps)(App);

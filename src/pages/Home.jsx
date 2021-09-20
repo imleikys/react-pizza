@@ -19,7 +19,7 @@ export const Home = (props) => {
       </div>
       <h2 className="content__title">Все пиццы</h2>
       <div className="content__items">
-        {props.items.map((item) => (
+        {props.items && props.items.map((item) => (
           <PizzaBlock key={item.id} item={item} />
         ))}
       </div>
