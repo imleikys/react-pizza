@@ -3,20 +3,22 @@ import {Home, Cart} from './pages';
 import {Switch, Route, Redirect} from 'react-router';
 import {setPizzas} from './redux/actions/pizzas';
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import "./App.scss";
 
 
 const App = () => {
   
-  const dispatch = useDispatch();
-  const appStore = useSelector(({pizzas}) => {
-    return {
-      items: pizzas.items
-    }
-  });
+  window.test = () => {
+    axios.get('https://react-pizza-de682-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json').then((response) => {
+      dispatch(setPizzas(response.data));
+    });
+  }
 
+
+  const dispatch = useDispatch();
+  
   useEffect(() => {
     axios.get('https://react-pizza-de682-default-rtdb.europe-west1.firebasedatabase.app/pizzas.json').then((response) => {
       dispatch(setPizzas(response.data));
@@ -30,7 +32,7 @@ const App = () => {
         <div className="content">
           <Switch>
             <Route path="/" exact>
-              <Home items={appStore.items} />
+              <Home />
             </Route>
             <Route path='/cart' exact>
               <Cart />
