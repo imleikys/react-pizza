@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.21.4",
     "classnames": "^2.3.1",
+    "json-server": "^0.16.3",
     "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -16,6 +17,7 @@
     "react-router-dom": "^5.2.1",
     "react-scripts": "4.0.3",
     "redux": "^4.1.1",
+    "redux-thunk": "^2.3.0",
     "sass": "^1.38.2",
     "web-vitals": "^1.0.1"
   },
@@ -23,7 +25,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "serve": "json-server --watch ./src/db.json --port 3001"
   },
   "eslintConfig": {
     "extends": [
