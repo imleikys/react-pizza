@@ -1,21 +1,11 @@
+import React from 'react';
 import {Header} from './components';
 import {Home, Cart} from './pages';
 import {Switch, Route, Redirect} from 'react-router';
-import {fetchPizzas} from './redux/actions/pizzas';
-import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
-import axios from 'axios';
 import "./App.scss";
 
 
 const App = () => {
-
-  const dispatch = useDispatch();
-  
-  useEffect(() => {
-    dispatch(fetchPizzas())
-  }, []);
-
   return (
     <div className="App">
       <div className="wrapper">
