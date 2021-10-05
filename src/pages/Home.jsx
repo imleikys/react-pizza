@@ -7,9 +7,9 @@ import {setCategory, setSortBy} from "../redux/actions/filters";
 
 const categoryNames = ["Мясные", "Вегетарианская", "Гриль", "Острые", "Закрытые"]
 const sortItems = [
-  { name: "популярности", type: "popular" },
-  { name: "цене", type: "price" },
-  { name: "алфавиту", type: "alphabet" },
+  { name: "популярности", type: "popular", order: 'desc' },
+  { name: "цене", type: "price", order: 'desc' },
+  { name: "алфавиту", type: "name", order: 'asc' },
 ]
 
 export const Home = () => {
@@ -24,12 +24,12 @@ export const Home = () => {
     dispatch(setCategory(index));
   }, [dispatch]);
 
-  const onSelectSortType = useCallback((type) => {
-    dispatch(setSortBy(type));
+  const onSelectSortType = useCallback((obj) => {
+    dispatch(setSortBy(obj));
   }, [dispatch]);
 
   useEffect(() => {
-    dispatch(fetchPizzas());
+    dispatch(fetchPizzas(sortBy, category));
   }, [category, dispatch, sortBy]);
 
   return (
