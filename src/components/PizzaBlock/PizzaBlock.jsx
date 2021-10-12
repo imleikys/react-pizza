@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Button} from '..';
 
 
 export const PizzaBlock = (props) => {
@@ -55,7 +56,7 @@ export const PizzaBlock = (props) => {
       </div>
       <div className="pizza-block__bottom">
         <div className="pizza-block__price">от {props.item.price} ₽</div>
-        <div className="button button--outline button--add">
+        <Button className="button--add" outline>
           <svg
             width="12"
             height="12"
@@ -70,7 +71,7 @@ export const PizzaBlock = (props) => {
           </svg>
           <span>Добавить</span>
           <i>2</i>
-        </div>
+        </Button>
       </div>
     </div>
   );
