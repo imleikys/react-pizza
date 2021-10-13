@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Button} from '..';
 
 
-export const PizzaBlock = (props) => {
+export const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onAddToCart}) => {
 
-  const [activeType, setActiveType] = useState(props.item.types[0]);
+  const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(0);
   
   const aviableTypes = ['тонкое', 'традиционное'];
@@ -18,14 +18,19 @@ export const PizzaBlock = (props) => {
     setActiveSize(index);
   }
 
+  const onAddToCartHandler = () => {
+    const returnVal = {id, name, imageUrl, price, size: aviableSizes[activeSize], type: aviableTypes[activeType]};
+    onAddToCart(returnVal);
+  }
+
   return (
     <div className="pizza-block">
       <img
         className="pizza-block__image"
-        src={props.item.imageUrl}
+        src={imageUrl}
         alt="Pizza"
       />
-      <h4 className="pizza-block__title">{props.item.name}</h4>
+      <h4 className="pizza-block__title">{name}</h4>
       <div className="pizza-block__selector">
         <ul>
           {
@@ -33,7 +38,7 @@ export const PizzaBlock = (props) => {
               <li
                 key={`${type}__${index}`}
                 onClick={() => onSelectType(index)}
-                className={`${!props.item.types.includes(index) ? 'disabled' : ''} ${activeType === index ? 'active' : ''}`}
+                className={`${!types.includes(index) ? 'disabled' : ''} ${activeType === index ? 'active' : ''}`}
               >
                 {type}
               </li>
@@ -46,7 +51,7 @@ export const PizzaBlock = (props) => {
               <li
                 key={`${size}__${index}`}
                 onClick={() => onSelectSize(index)}
-                className={`${!props.item.sizes.includes(size) ? 'disabled' : ''} ${activeSize === index ? 'active' : ''}`}
+                className={`${!sizes.includes(size) ? 'disabled' : ''} ${activeSize === index ? 'active' : ''}`}
               >
                 {size} см
               </li>
@@ -55,8 +60,8 @@ export const PizzaBlock = (props) => {
         </ul>
       </div>
       <div className="pizza-block__bottom">
-        <div className="pizza-block__price">от {props.item.price} ₽</div>
-        <Button className="button--add" outline>
+        <div className="pizza-block__price">от {price} ₽</div>
+        <Button onClick={onAddToCartHandler} className="button--add" outline>
           <svg
             width="12"
             height="12"

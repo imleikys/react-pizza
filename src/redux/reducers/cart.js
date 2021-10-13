@@ -13,10 +13,10 @@ export const cartReducer = (state = initialState, action) => {
       return {
         ...state, 
         items: {
-          [action.payload.id]: [
-            ...state.items[action.payload.id], 
-            action.payload
-          ]
+          ...state.items,
+          [action.payload.id]: !state.items[action.payload.id] 
+            ? [action.payload] 
+            : [...state.items[action.payload.id], action.payload]
         }
       }
     case SET_TOTAL_COUNT:

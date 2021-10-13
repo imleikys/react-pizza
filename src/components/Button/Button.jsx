@@ -2,11 +2,10 @@ import React from 'react';
 
 export const Button = (props) => {
 
-  console.log(props)
   const classes = props.outline ? 'button button--outline ' : 'button ' + props.className;
 
   return (
-    <button className={classes + ' ' + props.className}>
+    <button onClick={(val) => props.onClick(val)} className={classes + ' ' + props.className}>
       {props.children}
     </button>
   );
