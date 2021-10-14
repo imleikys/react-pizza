@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import {Button} from '..';
 
 
-export const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onAddToCart}) => {
+export const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onAddToCart, addedItems}) => {
 
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(0);
@@ -75,7 +75,7 @@ export const PizzaBlock = ({id, name, imageUrl, price, types, sizes, onAddToCart
             />
           </svg>
           <span>Добавить</span>
-          <i>2</i>
+          {addedItems && <i>{addedItems}</i>}
         </Button>
       </div>
     </div>
