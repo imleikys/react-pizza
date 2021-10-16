@@ -2,7 +2,7 @@ import React from 'react';
 import {Header} from './components';
 import {Home, Cart} from './pages';
 import {Switch, Route, Redirect} from 'react-router';
-import "./App.scss";
+import './scss/app.scss';
 
 
 const App = () => {
