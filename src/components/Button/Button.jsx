@@ -5,7 +5,7 @@ export const Button = (props) => {
   const classes = props.outline ? 'button button--outline ' : 'button ' + props.className;
 
   return (
-    <button className={classes + ' ' + props.className}>
+    <button onClick={props.onClick} className={classes + ' ' + props.className}>
       {props.children}
     </button>
   );
