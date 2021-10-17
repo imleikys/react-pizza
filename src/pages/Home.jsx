@@ -50,7 +50,7 @@ export const Home = () => {
           !isLoaded 
             ? Array(12).fill(0).map((_, index) => (<PizzaBlockLoader key={index} />))
             : items.map((item) => (
-              <PizzaBlock addedItems={cartItems[item.id] && cartItems[item.id].length} onAddToCart={onAddPizzaHandler} key={item.id} {...item} />
+              <PizzaBlock addedItems={cartItems[item.id] && cartItems[item.id].items.length} onAddToCart={onAddPizzaHandler} key={item.id} {...item} />
             ))
         }
       </div>

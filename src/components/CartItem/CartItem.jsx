@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export const CartItem = ({id, imageUrl, name, price, size, type}) => {
+export const CartItem = ({imageUrl, name, size, type, totalPrice}) => {
 
   return (
     <div className="cart__item">
@@ -56,7 +56,7 @@ export const CartItem = ({id, imageUrl, name, price, size, type}) => {
         </div>
       </div>
       <div className="cart__item-price">
-        <b>{price} ₽</b>
+        <b>{totalPrice} ₽</b>
       </div>
       <div className="cart__item-remove">
         <div className="button button--outline button--circle">
