@@ -1,4 +1,4 @@
-import {ADD_PIZZA_TO_CART, SET_TOTAL_COUNT} from "../constants";
+import {ADD_PIZZA_TO_CART, CLEAR_CART, SET_TOTAL_COUNT} from "../constants";
 
 
 const initialState = {
@@ -37,6 +37,9 @@ export const cartReducer = (state = initialState, action) => {
         totalPrice: getTotalPrice(allPizzas),
       }
     }
+
+    case CLEAR_CART:
+      return {items: {}, totalPrice: 0, totalCount: 0}
       
     case SET_TOTAL_COUNT:
       return {...state, totalItems: action.payload}

@@ -1,7 +1,7 @@
 import React from "react";
 
 
-export const CartItem = ({imageUrl, name, size, type, totalPrice}) => {
+export const CartItem = ({imageUrl, name, size, type, totalPrice, totalCount}) => {
 
   return (
     <div className="cart__item">
@@ -35,7 +35,7 @@ export const CartItem = ({imageUrl, name, size, type, totalPrice}) => {
             />
           </svg>
         </div>
-        <b>2</b>
+        <b>{totalCount}</b>
         <div className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
