@@ -1,4 +1,4 @@
-import {SET_TOTAL_COUNT, ADD_PIZZA_TO_CART, CLEAR_CART} from "../constants";
+import {SET_TOTAL_COUNT, ADD_PIZZA_TO_CART, CLEAR_CART, REMOVE_CART_ITEM} from "../constants";
 
 
 export const addPizzaToCart = (pizza) => ({
@@ -14,3 +14,8 @@ export const setTotalItems = (payload) => ({
 export const clearCart = () => ({
   type: CLEAR_CART,
 });
+
+export const removeCartItem = (itemID) => ({
+  type: REMOVE_CART_ITEM,
+  payload: itemID,
+})

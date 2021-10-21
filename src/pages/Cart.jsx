@@ -2,7 +2,7 @@ import React from "react";
 import {CartItem} from "../components";
 import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {clearCart} from "../redux/actions/cart";
+import {clearCart, removeCartItem} from "../redux/actions/cart";
 import emptyCartImage from "../assets/img/empty-cart.png";
 
 
@@ -18,6 +18,12 @@ export const Cart = () => {
       dispatch(clearCart());
     }
   };
+
+  const onRemoveItem = (itemID) => {
+    if(window.confirm("Вы действительно хотите удалить?")) {
+      dispatch(removeCartItem(itemID))
+    }
+  }
 
   return (
     <div className="container container--cart">
@@ -101,12 +107,15 @@ export const Cart = () => {
             {addedPizzas &&
               addedPizzas.map((pizza) => (
                 <CartItem
+                  id={pizza.id}
                   name={pizza.name}
                   size={pizza.size}
                   imageUrl={pizza.imageUrl}
                   type={pizza.type}
                   totalPrice={items[pizza.id].totalPrice}
                   totalCount={items[pizza.id].items.length}
+                  onRemove={onRemoveItem}
+                  key={pizza.id}
                 />
               ))}
           </div>
@@ -153,7 +162,7 @@ export const Cart = () => {
       ) : (
         <div className="cart cart--empty">
           <h2>
-            Корзина пустая <icon>😕</icon>
+            Корзина пустая
           </h2>
           <p>
             Вероятней всего, вы не заказывали ещё пиццу.
