@@ -2,7 +2,7 @@ import React from "react";
 import {CartItem} from "../components";
 import {Link} from "react-router-dom";
 import {useSelector, useDispatch} from "react-redux";
-import {clearCart, removeCartItem} from "../redux/actions/cart";
+import {clearCart, minusItem, plusItem, removeCartItem} from "../redux/actions/cart";
 import emptyCartImage from "../assets/img/empty-cart.png";
 
 
@@ -23,6 +23,14 @@ export const Cart = () => {
     if(window.confirm("Вы действительно хотите удалить?")) {
       dispatch(removeCartItem(itemID))
     }
+  }
+
+  const onPlusItem = (itemID) => {
+    dispatch(plusItem(itemID));
+  }
+
+  const onMinusItem = (itemID) => {
+    dispatch(minusItem(itemID));
   }
 
   return (
@@ -115,6 +123,8 @@ export const Cart = () => {
                   totalPrice={items[pizza.id].totalPrice}
                   totalCount={items[pizza.id].items.length}
                   onRemove={onRemoveItem}
+                  onPlus={onPlusItem}
+                  onMinus={onMinusItem}
                   key={pizza.id}
                 />
               ))}

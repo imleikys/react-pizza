@@ -2,10 +2,18 @@ import React from "react";
 import { Button } from "..";
 
 
-export const CartItem = ({id, imageUrl, name, size, type, totalPrice, totalCount, onRemove}) => {
+export const CartItem = ({id, imageUrl, name, size, type, totalPrice, totalCount, onRemove, onPlus, onMinus}) => {
 
   const handleRemoveClick = () => {
     onRemove(id);
+  }
+
+  const handlePlusClick = () => {
+    onPlus(id);
+  }
+
+  const handleMinusClick = () => {
+    onMinus(id);
   }
 
   return (
@@ -22,7 +30,7 @@ export const CartItem = ({id, imageUrl, name, size, type, totalPrice, totalCount
         <p>{type} тесто, {size} см.</p>
       </div>
       <div className="cart__item-count">
-        <div className="button button--outline button--circle cart__item-count-minus">
+        <div onClick={handleMinusClick} className="button button--outline button--circle cart__item-count-minus">
           <svg
             width="10"
             height="10"
@@ -41,7 +49,7 @@ export const CartItem = ({id, imageUrl, name, size, type, totalPrice, totalCount
           </svg>
         </div>
         <b>{totalCount}</b>
-        <div className="button button--outline button--circle cart__item-count-plus">
+        <div onClick={handlePlusClick} className="button button--outline button--circle cart__item-count-plus">
           <svg
             width="10"
             height="10"
